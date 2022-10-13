@@ -1,0 +1,144 @@
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+        <title>太平洋网络IP地址查询Web接口</title>
+        <meta name="description" content="免费IP地址查询Web接口" />
+        <meta name="keywords" content="提供免费的IP地址查询接口" />
+    </head>
+    <body>
+        <ul>
+            <li><a href="#tabs-1">IP信息</a></li>
+            <li><a href="#tabs-2">接口说明</a></li>
+            <li><a href="#tabs-3">关于IP地址库</a></li>
+        </ul>
+        <a name="tabs-1"></a>
+        <form action="" method="get">
+            <p>
+				IP地址：<input type="text"  name="ip" value="58.39.133.176"> <input type="submit">
+            </p>
+            <p>
+				位置：上海市嘉定区 电信ADSL
+            </p>
+        </form>
+        
+        您是通过代理上网，内部网的IP为: 58.39.133.176
+        <br/>
+
+        RemoteAddr=172.20.7.6<br/>
+
+        Host=whois.pconline.com.cn
+<br/>
+X-Real-IP=58.39.133.176
+<br/>
+X-Forwarded-For=58.39.133.176
+<br/>
+Connection=close
+<br/>
+Accept=*/*
+<br/>
+UA-CPU=AMD64
+<br/>
+Accept-Encoding=gzip, deflate
+<br/>
+User-Agent=Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; Win64; x64; Trident/7.0; .NET4.0C; .NET4.0E; McAfee)
+<br/>
+
+		<hr />
+
+        <a name="tabs-2"></a>
+		<h3>接口列表：</h3>
+<table width="65%">
+	<tr>
+		<td>(1)<a href="ip.jsp" target="_blank">ip.jsp</a></td>
+		<td>(2)<a href="ipJson.jsp" target="_blank">ipJson.jsp</a></td>
+		<td>(3)<a href="jsAlert.jsp" target="_blank">jsAlert.jsp</a></td>
+		<td>(4)<a href="jsDom.jsp" target="_blank">jsDom.jsp</a></td>
+	</tr>
+	<tr>
+		<td>(5)<a href="jsFunction.jsp" target="_blank">jsFunction.jsp</a></td>
+		<td>(6)<a href="jsLabel.jsp" target="_blank">jsLabel.jsp</a></td>
+		<td>(7)<a href="jsWrite.jsp" target="_blank">jsWrite.jsp</a></td>
+		<td>(8)<a href="whois/index.jsp" target="_blank">whois/index.jsp</a></td>
+	</tr>
+	<tr>
+		<td>(9)<a href="ipAreaCoord.jsp?coords=113.360414,23.16405&level=3" target="_blank">ipAreaCoord.jsp</a></td>
+		<td>(10)<a href="ipAreaCoordJson.jsp?coords=113.360414,23.16405&level=3" target="_blank">ipAreaCoordJson.jsp</a></td>
+	</tr>
+</table>
+
+		接口参数:<br />
+		@param ip:可指定IP地址，不指定则取request.getRemoteAddr()的值。支持以下格式：（a）202.96.159.254 （b）202.<font color="red">0</font>96.159.254 (c)202.96.159.254/192.168.20.106 (<font color=red>适用于接口1-8</font>)<br />
+		@param rep:可指定活动页代码，输出的结果会按系统设置映射到相应的地区 (<font color=red>适用于接口1-8</font>)<br />
+		@param level:可指定输出结果的精度，=1/=2/=3分别代表只输出省名称/输出省市名称/输出省市区名称 (<font color=red>适用于接口1-9</font>)<br />
+		@param siteId:可指定网站或应用代码,输出IP所属的区域 (<font color=red>适用于接口2,5. siteId与rep原则上是互斥的</font>)<br />
+		@param callback:指定回调函数的名称, 不指定则默认为'IPCallBack' (<font color=red>适用于接口2,5</font>)<br />
+		@param domId:指定结点ID (<font color=red>适用于接口4, 必须指定</font>)<br />
+		@param id:指定结点ID (<font color=red>适用于接口6, 必须指定</font>)<br />
+		@param coords:指定坐标值，经度+","+纬度，经度纬度都是2个带小数点的数字。经度范围在73至135之间，纬度范围在3至53之间，即国内区域，不是中国的直接返回空 (<font color=red>适用于接口9-10, 必须指定</font>)<br />
+		@param json:可指定是否以json格式输出结果,不指定则默认为false。(<font color=red>适用于接口2,10</font>)<br />
+
+<br />
+        <strong>1.  JS 接口形式，在页面需要显示IP信息的地方加载js</strong><br />
+<textarea cols="110" rows="4">
+<script src="ip.js"></script>
+点击提示实例1: IP为 <a href="javascript:alertIp('58.39.133.176');">58.39.133.176</a>
+点击显示实例1: IP为 <a href="javascript:labelIp('showIpInfo','58.39.133.176');">58.39.133.176</a> 位置信息:<span id="showIpInfo" style="color:#FF0000"></span>
+</textarea>
+        <br/>
+        <script src="ip.js"></script>
+        <script>
+            whois.root="http://whois.pconline.com.cn";            
+        </script>
+        点击提示实例1: IP为 <a href="javascript:alertIp('58.39.133.176');">58.39.133.176</a> <br/>
+        点击显示实例1: IP为 <a href="javascript:labelIp('showIpInfo','58.39.133.176');">58.39.133.176</a> 位置信息:<span id="showIpInfo" style="color:#FF0000"></span><br/>
+
+		<br /><strong>2. 回调的JS方式，加载js，然后以回调方式通知</strong><br />
+<textarea cols="110" rows="7">
+显示IP地址为 58.39.133.176 的位置信息,<span id="idJsShow"></span>
+<script>
+function jsShow(location){
+    document.getElementById("idJsShow").innerHTML = location;
+}
+</script>
+<script src="jsFunction.jsp?callback=jsShow&ip=58.39.133.176"></script>
+</textarea>
+        <br/>
+		显示IP地址为 58.39.133.176 的位置信息,<span id="idJsShow"></span><br/>
+        <script>
+            function jsShow(location){
+                document.getElementById("idJsShow").innerHTML = location;
+            }
+        </script>
+        <script src="jsFunction.jsp?callback=jsShow&ip=58.39.133.176"></script>
+
+		<br /><strong>3. Json格式输出</strong><br />
+<textarea cols="110" rows="7">
+显示IP地址为 61.235.82.163 的位置信息,<span id="idTestJson"></span><br/>
+<script>
+function testJson(obj) {
+    document.getElementById("idTestJson").innerHTML = "省["+obj.pro+"] 市["+obj.city+"] 区["+obj.region+"]";
+}
+</script>
+<script src="ipJson.jsp?callback=testJson&ip=61.235.82.163"></script>
+</textarea>
+        <br/>
+		显示IP地址为 61.235.82.163 的位置信息,<span id="idTestJson"></span><br/>
+		<script>
+			function testJson(obj) {
+				document.getElementById("idTestJson").innerHTML = "省["+obj.pro+"] 市["+obj.city+"] 区["+obj.region+"]";
+			}
+		</script>
+		<script src="ipJson.jsp?callback=testJson&ip=61.235.82.163"></script>
+
+<hr />
+        <a name="tabs-3"></a>
+        <p>IP 地址库 V2.0 </p>
+    </body>
+</html>
